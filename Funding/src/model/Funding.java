@@ -61,7 +61,7 @@ public class Funding {
 				return "Error while connecting to the database for reading.";
 			}
 			// Prepare the html table to be displayed
-			output = "<table border=\"1\"><tr><th>Fund ID</th><th>Funder Name</th><th>Date</th><th>Price</th><th>Category</th><th>Description</th></tr>";
+			output = "<table border=\"1\"><tr><th>Funder Name</th><th>Date</th><th>Price</th><th>Category</th><th>Description</th></tr>";
 			String query = "select * from fundingtest1";
 			Statement stmt = (Statement) con.createStatement();
 			ResultSet rs = ((java.sql.Statement) stmt).executeQuery(query);
@@ -115,7 +115,7 @@ public class Funding {
 			preparedStmt.setDouble(3, Double.parseDouble(fun_price));
 			preparedStmt.setString(4, fun_cate);
 			preparedStmt.setString(5, fun_des);
-			preparedStmt.setInt(5, Integer.parseInt(fun_Id));
+			preparedStmt.setInt(6, Integer.parseInt(fun_Id));
 
 			// execute the statement
 			preparedStmt.execute();
