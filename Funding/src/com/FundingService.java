@@ -26,7 +26,7 @@ public class FundingService {
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String insertProduct(@FormParam("funderName") String funderName, 
+	public String insertFund(@FormParam("funderName") String funderName, 
 			@FormParam("fundDate") String fundDate,
 			@FormParam("fundPrice") String fundPrice,
 			@FormParam("fundCate") String fundCate,
