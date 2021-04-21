@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -36,7 +37,7 @@ public class Funding {
 			// binding values
 			preparedStmt.setInt(1, 0);
 			preparedStmt.setString(2, fun_name);
-			preparedStmt.setString(3, fun_date);
+			preparedStmt.setDate(3, Date.valueOf(fun_date));
 			preparedStmt.setDouble(4, Double.parseDouble(fun_price));
 			preparedStmt.setString(5, fun_cate);
 			preparedStmt.setString(6, fun_des);
@@ -61,7 +62,7 @@ public class Funding {
 				return "Error while connecting to the database for reading.";
 			}
 			// Prepare the html table to be displayed
-			output = "<table border=\"1\"><tr><th>Funder Name</th><th>Date</th><th>Price</th><th>Category</th><th>Description</th></tr>";
+			output = "<table border=\"1\"><tr><th>Funder Name</th><th>Date</th><th>Price</th><th>Category</th><th>Description</th><th>Update</th><th>Remove</th></tr>";
 			String query = "select * from fundingtest1";
 			Statement stmt = (Statement) con.createStatement();
 			ResultSet rs = ((java.sql.Statement) stmt).executeQuery(query);
@@ -80,6 +81,12 @@ public class Funding {
 				output += "<td>" + fundPrice + "</td>";
 				output += "<td>" + fundCate + "</td>";
 				output += "<td>" + fundDesc + "</td>";
+				
+				output += "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>"
+						 + "<td><form method='post' action='found.jsp'>"
+						 + "<input name='btnRemove' type='submit' value='Remove' class='btn btn-danger'>"
+						 + "<input name='itemID' type='hidden' value='" + fundId 
+						 + "'>" + "</form></td></tr>"; 
 
 			}
 			con.close();
@@ -111,7 +118,7 @@ public class Funding {
 			// binding values
 
 			preparedStmt.setString(1, fun_name);
-			preparedStmt.setString(2, fun_date);
+			preparedStmt.setDate(2, Date.valueOf(fun_date));
 			preparedStmt.setDouble(3, Double.parseDouble(fun_price));
 			preparedStmt.setString(4, fun_cate);
 			preparedStmt.setString(5, fun_des);
