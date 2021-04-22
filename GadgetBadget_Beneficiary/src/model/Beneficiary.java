@@ -22,7 +22,7 @@ public class Beneficiary
 		return con;
 	}
 	
-	public String insertBeneficiary(String code, String name, String type, String desc)
+	public String insertInventor(String id, String age, String address, String password)
 	{
 		String output = "";
 		try
@@ -31,16 +31,16 @@ public class Beneficiary
 			if (con == null)
 			{return "Error while connecting to the database for inserting."; }
 			// create a prepared statement
-			String query = " insert into beneficiares(`beneficiaryID`,`beneficairyCode`,`beneficiaryName`,`productType`,`beneficiaryDesc`)"
+			String query = " insert into beneficiares(`inventorCode`,`inventorID`,`inventorAge`,`inventorAddress`,`inventorPassword`)"
 					+ " values (?, ?, ?, ?, ?)";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			
 			// binding values
 			preparedStmt.setInt(1, 0);
-			preparedStmt.setString(2, code);
-			preparedStmt.setString(3, name);
-			preparedStmt.setString(4, type);
-			preparedStmt.setString(5, desc);
+			preparedStmt.setString(2, id);
+			preparedStmt.setString(3, age);
+			preparedStmt.setString(4, address);
+			preparedStmt.setString(5, password);
 			
 			// execute the statement3
 			preparedStmt.execute();
@@ -55,7 +55,7 @@ public class Beneficiary
 		return output;
 	}
 	
-	public String readBeneficiary()
+	public String readInventors()
 	{
 		String output = "";
 		try
@@ -64,9 +64,9 @@ public class Beneficiary
 			if (con == null)
 			{return "Error while connecting to the database for reading."; }
 			// Prepare the html table to be displayed
-			output = "<table border='1'><tr><th>Beneficiary Code</th><th>Beneficiary Name</th>" +
-					"<th>Product Type</th>" +
-					"<th>Beneficiary Description</th>" +
+			output = "<table border='1'><tr><th>Inventor ID</th><th>Inventor Age</th>" +
+					"<th>Inventor Address</th>" +
+					"<th>Inventor Password</th>" +
 					"<th>Update</th><th>Remove</th></tr>";
 			String query = "select * from beneficiares";
 			
@@ -76,20 +76,20 @@ public class Beneficiary
 			// iterate through the rows in the result set
 			while (rs.next())
 			{
-				String beneficiaryID = Integer.toString(rs.getInt("beneficiaryID"));
-				String beneficairyCode = rs.getString("beneficairyCode");
-				String beneficiaryName = rs.getString("beneficiaryName");
-				String productType = rs.getString("productType");
-				String beneficiaryDesc = rs.getString("beneficiaryDesc");
+				String inventorCode = Integer.toString(rs.getInt("inventorCode"));
+				String inventorID = rs.getString("inventorID");
+				String inventorAge = rs.getString("inventorAge");
+				String inventorAddress = rs.getString("inventorAddress");
+				String inventorPassword = rs.getString("inventorPassword");
 				
 				// Add into the html table
-				output += "<tr><td>" + beneficairyCode + "</td>";
-				output += "<td>" + beneficiaryName + "</td>";
-				output += "<td>" + productType + "</td>";
-				output += "<td>" + beneficiaryDesc + "</td>";
+				output += "<tr><td>" + inventorID + "</td>";
+				output += "<td>" + inventorAge + "</td>";
+				output += "<td>" + inventorAddress + "</td>";
+				output += "<td>" + inventorPassword + "</td>";
 				
 				// buttons
-				output += "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>" + "<td><form method='post' action='items.jsp'>" + "<input name='btnRemove' type='submit' value='Remove' class='btn btn-danger'>" + "<input name='beneficiaryID' type='hidden' value='" + beneficiaryID+ "'>" + "</form></td></tr>";
+				output += "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>" + "<td><form method='post' action='beneficiary.jsp'>" + "<input name='btnRemove' type='submit' value='Remove' class='btn btn-danger'>" + "<input name='inventorCode' type='hidden' value='" + inventorCode + "'>" + "</form></td></tr>";
 			}
 			
 			con.close();
@@ -106,7 +106,7 @@ public class Beneficiary
 			return output;
 	}
 	
-	public String updateBeneficiary(String ID, String code, String name, String type, String desc)
+	public String updateInventor(String code, String id, String age, String address, String password)
 	{
 		String output = "";
 		try
@@ -116,16 +116,16 @@ public class Beneficiary
 			{return "Error while connecting to the database for updating."; }
 			
 			// create a prepared statement
-			String query = "UPDATE beneficiares SET beneficairyCode=?,beneficiaryName=?,productType=?,beneficiaryDesc=? WHERE beneficiaryID=?";
+			String query = "UPDATE beneficiares SET inventorID=?,inventorAge=?,inventorAddress=?,inventorPassword=? WHERE inventorCode=?";
 			
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			
 			// binding values
-			preparedStmt.setString(1, code);
-			preparedStmt.setString(2, name);
-			preparedStmt.setString(3, type);
-			preparedStmt.setString(4, desc);
-			preparedStmt.setInt(5, Integer.parseInt(ID));
+			preparedStmt.setString(1, id);
+			preparedStmt.setString(2, age);
+			preparedStmt.setString(3, address);
+			preparedStmt.setString(4, password);
+			preparedStmt.setInt(5, Integer.parseInt(code));
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
@@ -140,7 +140,7 @@ public class Beneficiary
 		return output;
 	}
 	
-	public String deleteBeneficiary(String beneficiaryID)
+	public String deleteInventor(String inventorCode)
 	{
 		String output = "";
 		try
@@ -150,11 +150,11 @@ public class Beneficiary
 			{return "Error while connecting to the database for deleting."; }
 			
 			// create a prepared statement
-			String query = "delete from beneficiares where beneficiaryID=?";
+			String query = "delete from beneficiares where inventorCode=?";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			
 			// binding values
-			preparedStmt.setInt(1, Integer.parseInt(beneficiaryID));
+			preparedStmt.setInt(1, Integer.parseInt(inventorCode));
 			
 			// execute the statement
 			preparedStmt.execute();

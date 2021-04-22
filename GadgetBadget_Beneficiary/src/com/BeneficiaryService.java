@@ -10,7 +10,7 @@ import com.google.gson.*;
 import org.jsoup.*; 
 import org.jsoup.parser.*; 
 import org.jsoup.nodes.Document; 
-@Path("/Beneficiary")
+@Path("/Inventors")
 
 public class BeneficiaryService {
 
@@ -18,9 +18,9 @@ public class BeneficiaryService {
 	@GET
 	@Path("/") 
 	@Produces(MediaType.TEXT_HTML) 
-	public String readItems() 
+	public String readInventors() 
 	 { 
-		return benObj.readBeneficiary();
+		return benObj.readInventors();
 	 } 
 	
 	//insert item
@@ -28,13 +28,14 @@ public class BeneficiaryService {
 		@Path("/") 
 		@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
 		@Produces(MediaType.TEXT_PLAIN) 
-		public String insertItem(@FormParam("beneficairyCode") String beneficiaryCode, 
-		 @FormParam("beneficiaryName") String beneficiaryName, 
-		 @FormParam("productType") String productType, 
-		 @FormParam("beneficiaryDesc") String beneficiaryDesc) 
+		public String insertInventor(@FormParam("inventorID") String inventorID, 
+		 @FormParam("inventorAge") String inventorAge, 
+		 @FormParam("inventorAddress") String inventorAddress, 
+		 @FormParam("inventorPassword") String inventorPassword) 
 		{ 
-		 String output = benObj.insertBeneficiary(beneficiaryCode, beneficiaryName, productType, beneficiaryDesc); 
-		return output; 
+			String output = benObj.insertInventor(inventorID, inventorAge, inventorAddress, inventorPassword); 
+			
+			return output; 
 		}
 
 	
@@ -44,35 +45,39 @@ public class BeneficiaryService {
 		@Path("/") 
 		@Consumes(MediaType.APPLICATION_JSON) 
 		@Produces(MediaType.TEXT_PLAIN) 
-		public String updateBeneficiary(String beneficiaryData) 
+		public String updateInventor(String inventorData) 
 		{ 
-		//Convert the input string to a JSON object 
-		 JsonObject benObject = new JsonParser().parse(beneficiaryData).getAsJsonObject(); 
-		//Read the values from the JSON object
-		 String beneficiaryID = benObject.get("beneficiaryID").getAsString(); 
-		 String beneficiaryCode = benObject.get("beneficairyCode").getAsString(); 
-		 String beneficiaryName = benObject.get("beneficiaryName").getAsString(); 
-		 String productType = benObject.get("productType").getAsString(); 
-		 String beneficiaryDesc = benObject.get("beneficiaryDesc").getAsString(); 
-		 String output = benObj.updateBeneficiary(beneficiaryID, beneficiaryCode, beneficiaryName, productType, beneficiaryDesc); 
-		return output; 
+			//Convert the input string to a JSON object 
+			JsonObject benObject = new JsonParser().parse(inventorData).getAsJsonObject(); 
+			
+			//Read the values from the JSON object
+			String inventorCode = benObject.get("inventorCode").getAsString(); 
+			String inventorID = benObject.get("inventorID").getAsString(); 
+			String inventorAge = benObject.get("inventorAge").getAsString(); 
+			String inventorAddress = benObject.get("inventorAddress").getAsString(); 
+			String inventorPassword = benObject.get("inventorPassword").getAsString(); 
+			
+			String output = benObj.updateInventor(inventorCode, inventorID, inventorAge, inventorAddress, inventorPassword);
+			
+			return output; 
 		}
 
 
-// delete
-
-@DELETE
-@Path("/") 
-@Consumes(MediaType.APPLICATION_XML) 
-@Produces(MediaType.TEXT_PLAIN) 
-public String deleteBeneficiary(String beneficiaryData) 
-{ 
-//Convert the input string to an XML document
- Document doc = Jsoup.parse(beneficiaryData, "", Parser.xmlParser()); 
- 
-//Read the value from the element <itemID>
- String beneficiaryID = doc.select("beneficiaryID").text(); 
- String output = benObj.deleteBeneficiary(beneficiaryID); 
-return output; 
-}
+	// delete
+	
+	@DELETE
+	@Path("/") 
+	@Consumes(MediaType.APPLICATION_XML) 
+	@Produces(MediaType.TEXT_PLAIN) 
+	public String deleteInventor(String inventorData) 
+	{ 
+		//Convert the input string to an XML document
+		Document doc = Jsoup.parse(inventorData, "", Parser.xmlParser()); 
+	 
+		//Read the value from the element <inventorCode>
+		String inventorCode = doc.select("inventorCode").text(); 
+		String output = benObj.deleteInventor(inventorCode); 
+		
+		return output; 
+	}
 }
