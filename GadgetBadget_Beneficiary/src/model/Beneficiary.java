@@ -49,7 +49,7 @@ public class Beneficiary
 		}
 		catch (Exception e)
 		{
-			output = "Error while inserting the beneficiary.";
+			output = "Error while inserting the inventor.";
 			System.err.println(e.getMessage());
 		}
 		return output;
@@ -101,7 +101,7 @@ public class Beneficiary
 		}
 		catch (Exception e)
 		{
-			output = "Error while reading the beneficiaries.";
+			output = "Error while reading the inventors.";
 			System.err.println(e.getMessage());
 		}
 			return output;
@@ -136,7 +136,7 @@ public class Beneficiary
 		}
 		catch (Exception e)
 		{
-			output = "Error while updating the beneficiaries.";
+			output = "Error while updating the inventor.";
 			System.err.println(e.getMessage());
 			
 		}
@@ -167,7 +167,7 @@ public class Beneficiary
 		}
 		catch (Exception e)
 		{
-			output = "Error while deleting the beneficiaries.";
+			output = "Error while deleting the inventor.";
 			System.err.println(e.getMessage());
 		}
 		return output;
