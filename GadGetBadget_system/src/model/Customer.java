@@ -14,7 +14,7 @@ public class Customer
 			Class.forName("com.mysql.jdbc.Driver");
 			
 			//Provide the correct details: DBServer/DBName, username, password
-			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/customer", "root", "");
+			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/gadgetbadget_db", "root", "");
 			
 		}
 		catch (Exception e)
