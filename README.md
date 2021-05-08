@@ -10,6 +10,8 @@ Service Development
 •	Technologies Used: Java - JAX-RS (Jersey) on Tomcat
 •	IDE	: Eclipse
 •	Database: MySQL
- <img src=https://www.logo.wine/a/logo/Java_(programming_language)/Java_(programming_language)-Logo.wine.svg/>
- <img src=https://cdn.worldvectorlogo.com/logos/eclipse-11.svg/>
- <img src=https://seeklogo.com/images/M/mysql-logo-69B39F7D18-seeklogo.com.png/>
+
+<img src="https://www.logo.wine/a/logo/Java_(programming_language)/Java_(programming_language)-Logo.wine.svg" alt="javascript" width="70" height="70"/> 
+<img src="https://cdn.worldvectorlogo.com/logos/eclipse-11.svg" alt="javascript" width="70" height="70"/>
+<img src="https://seeklogo.com/images/M/mysql-logo-69B39F7D18-seeklogo.com.png" alt="javascript" width="70" height="70"/>
+
